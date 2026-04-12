@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    @apply antialiased font-sans;
+    background: linear-gradient(135deg, #0A172C 0%, #1A3A6B 40%, #243B6E 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: #fff;
+  }
+}
+
+@layer components {
+  /* ── Glass card (cobalt tint) */
+  .glass-card {
+    background: rgba(26, 58, 107, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.10);
+  }
+
+  /* ── Sidebar fixed panel */
+  .sidebar {
+    @apply fixed top-0 left-0 h-full flex flex-col;
+    background: linear-gradient(180deg, #0A172C 0%, #12224A 100%);
+    border-right: 1px solid rgba(255,255,255,0.06);
+    z-index: 50;
+    width: 240px;
+  }
+
+  /* ── Main content area (offset for sidebar) */
+  .main-content {
+    margin-left: 240px;
+    min-height: 100vh;
+    @apply overflow-y-auto;
+  }
+
+  /* ── Nav item */
+  .nav-item {
+    @apply flex items-center gap-3 px-5 py-3.5 rounded-xl mx-3 font-semibold text-sm transition-all duration-200 cursor-pointer;
+    color: rgba(255,255,255,0.6);
+  }
+  .nav-item:hover {
+    background: rgba(255,107,0,0.12);
+    color: #FF9A47;
+  }
+  .nav-item.active {
+    background: linear-gradient(135deg, #FF6B00, #E05E00);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(255,107,0,0.35);
+  }
+  .nav-item.active svg {
+    filter: drop-shadow(0 0 6px rgba(255,255,255,0.5));
+  }
+
+  /* ── Orange primary button */
+  .btn-orange {
+    @apply font-bold rounded-xl transition-all duration-200 flex items-center justify-center gap-2;
+    background: linear-gradient(135deg, #FF6B00, #E05E00);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(255,107,0,0.35);
+  }
+  .btn-orange:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(255,107,0,0.5);
+  }
+  .btn-orange:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  .btn-orange:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* ── Ghost button */
+  .btn-ghost {
+    @apply font-semibold rounded-xl transition-all duration-200 flex items-center justify-center gap-2;
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.75);
+    border: 1px solid rgba(255,255,255,0.10);
+  }
+  .btn-ghost:hover:not(:disabled) {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+  }
+
+  /* ── Stat card */
+  .stat-card {
+    @apply glass-card rounded-2xl p-6;
+  }
+
+  /* ── Event card */
+  .event-card {
+    @apply glass-card rounded-2xl p-5 transition-all duration-300;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .event-card:hover {
+    border-color: rgba(255,107,0,0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,107,0,0.2);
+  }
+
+  /* ── Input field */
+  .input-field {
+    @apply w-full rounded-xl px-4 py-3 font-medium text-sm transition-all duration-200 outline-none;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #fff;
+  }
+  .input-field::placeholder {
+    color: rgba(255,255,255,0.35);
+  }
+  .input-field:focus {
+    border-color: rgba(255,107,0,0.6);
+    background: rgba(255,255,255,0.10);
+    box-shadow: 0 0 0 3px rgba(255,107,0,0.12);
+  }
+
+  /* ── Label */
+  .form-label {
+    @apply block text-xs font-semibold uppercase tracking-widest mb-1.5;
+    color: rgba(255,255,255,0.55);
+  }
+
+  /* ── Badge */
+  .badge {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide;
+  }
+  .badge-orange {
+    background: rgba(255,107,0,0.18);
+    color: #FF9A47;
+    border: 1px solid rgba(255,107,0,0.3);
+  }
+  .badge-green {
+    background: rgba(16,185,129,0.18);
+    color: #34D399;
+    border: 1px solid rgba(16,185,129,0.3);
+  }
+  .badge-red {
+    background: rgba(239,68,68,0.18);
+    color: #F87171;
+    border: 1px solid rgba(239,68,68,0.3);
+  }
+  .badge-blue {
+    background: rgba(59,130,246,0.18);
+    color: #93C5FD;
+    border: 1px solid rgba(59,130,246,0.3);
+  }
+
+  /* ── Section divider */
+  .section-title {
+    @apply text-xs font-black uppercase tracking-widest px-5 py-2 mb-1;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* ── Loading spinner overlay */
+  .loading-overlay {
+    @apply flex flex-col items-center justify-center min-h-[400px] gap-4;
+  }
+
+  /* ── Toast override */
+  .toast-success {
+    background: #10B981 !important;
+    color: #fff !important;
+  }
+  .toast-error {
+    background: #EF4444 !important;
+    color: #fff !important;
+  }
+}
+
+/* ── Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.03);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,107,0,0.3);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,107,0,0.55);
+}
+
+/* ── Seat bar animation */
+@keyframes seat-fill {
+  from { width: 0; }
+  to { width: var(--fill); }
+}
+.seat-bar {
+  animation: seat-fill 0.8s ease-out forwards;
+}
+
+/* ── Calendar grid */
+.cal-day {
+  @apply rounded-lg text-center text-sm font-semibold py-2 cursor-pointer transition-all;
+  color: rgba(255,255,255,0.65);
+}
+.cal-day:hover {
+  background: rgba(255,107,0,0.15);
+  color: #FF9A47;
+}
+.cal-day.has-event {
+  background: rgba(255,107,0,0.2);
+  color: #FF9A47;
+  border: 1px solid rgba(255,107,0,0.3);
+}
+.cal-day.today {
+  background: linear-gradient(135deg,#FF6B00,#E05E00);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(255,107,0,0.4);
+}
+.cal-day.other-month {
+  opacity: 0.3;
+}
+
+/* ── QR Code container */
+.qr-container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  display: inline-block;
+}
+
+/* ── Chart bar hover */
+.chart-bar {
+  transition: opacity 0.2s;
+}
+.chart-bar:hover {
+  opacity: 0.85;
+}
