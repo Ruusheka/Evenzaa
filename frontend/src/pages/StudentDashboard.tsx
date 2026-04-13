@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { api } from '../api';
 import { Event } from '../types';
 import toast from 'react-hot-toast';
+import logo from '../assets/logo.png';
 
 // ── Sidebar nav items ────────────────────────────────────────────
 const NAV = [
@@ -37,19 +38,19 @@ const QRModal: React.FC<{ event: Event; rollNo: number; onClose: () => void }> =
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4"
-      style={{ background: 'rgba(5,13,26,0.85)', backdropFilter: 'blur(8px)' }}>
+      style={{ background: 'rgba(17,24,39,0.9)', backdropFilter: 'blur(8px)' }}>
       <div className="rounded-2xl p-8 max-w-sm w-full text-center relative"
-        style={{ background: 'linear-gradient(180deg,#1A3A6B,#0F2241)', border: '1px solid rgba(255,255,255,0.1)' }}>
-        <button onClick={onClose} className="absolute top-4 right-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
+        style={{ background: 'linear-gradient(180deg,#1F2937,#111827)', border: '1px solid rgba(124, 58, 237, 0.1)' }}>
+        <button onClick={onClose} className="absolute top-4 right-4" style={{ color: '#F9FAFB' }}>
           <X size={20} />
         </button>
-        <Zap size={24} className="mx-auto mb-3" style={{ color: '#FF6B00' }} />
-        <h3 className="text-white font-black text-lg mb-1">{event.name}</h3>
-        <p className="text-xs mb-6" style={{ color: 'rgba(255,255,255,0.45)' }}>Check-in QR Code • Roll No: {rollNo}</p>
+        <Zap size={24} className="mx-auto mb-3" style={{ color: '#7C3AED' }} />
+        <h3 className="text-[#F9FAFB] font-black text-lg mb-1">{event.name}</h3>
+        <p className="text-xs mb-6" style={{ color: '#D1D5DB' }}>Check-in QR Code • Roll No: {rollNo}</p>
         <div className="qr-container mx-auto mb-4 inline-block">
           <img src={qrUrl} alt="QR Code" className="w-48 h-48" />
         </div>
-        <p className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>Show this at the event venue</p>
+        <p className="text-xs" style={{ color: '#9CA3AF' }}>Show this at the event venue</p>
       </div>
     </div>
   );
@@ -69,42 +70,44 @@ const StudentEventCard: React.FC<EventCardProps> = ({ event, isRegistered, isCan
   const todayEvent = isToday(event.date);
 
   return (
-    <div className={`event-card group animate-fade-in relative ${todayEvent ? 'border-orange-500/40' : ''}`}>
-      {todayEvent && (
-        <div className="absolute top-3 right-3 badge badge-orange animate-pulse-slow">
-          <Zap size={10} /> TODAY
-        </div>
-      )}
-      {housefull && !isRegistered && (
-        <div className="absolute top-3 right-3 badge badge-red">
-          <AlertCircle size={10} /> HOUSEFULL
-        </div>
-      )}
-      {isRegistered && (
-        <div className="absolute top-3 right-3 badge badge-green">
-          <CheckCircle2 size={10} /> REGISTERED
-        </div>
-      )}
+    <div className={`event-card group animate-fade-in relative ${todayEvent ? 'border-purple-500/40' : ''}`}>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {todayEvent && (
+          <div className="badge badge-orange animate-pulse-slow">
+            <Zap size={10} /> TODAY
+          </div>
+        )}
+        {housefull && !isRegistered && (
+          <div className="badge badge-red">
+            <AlertCircle size={10} /> HOUSEFULL
+          </div>
+        )}
+        {isRegistered && (
+          <div className="badge badge-green">
+            <CheckCircle2 size={10} /> REGISTERED
+          </div>
+        )}
+      </div>
 
       {/* Date strip */}
       <div className="flex items-start gap-4 mb-4">
         <div className="shrink-0 w-14 h-14 rounded-xl flex flex-col items-center justify-center text-center"
-          style={{ background: 'rgba(255,107,0,0.15)', border: '1px solid rgba(255,107,0,0.25)' }}>
-          <span className="text-xs font-bold uppercase leading-none" style={{ color: '#FF9A47' }}>
+          style={{ background: 'rgba(124, 58, 237, 0.15)', border: '1px solid rgba(124, 58, 237, 0.25)' }}>
+          <span className="text-xs font-bold uppercase leading-none" style={{ color: '#A78BFA' }}>
             {new Date(event.date).toLocaleDateString('en-IN', { month: 'short' })}
           </span>
-          <span className="text-xl font-black text-white leading-none">
+          <span className="text-xl font-black text-[#F9FAFB] leading-none">
             {new Date(event.date).getDate()}
           </span>
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="text-white font-black text-base leading-tight truncate">{event.name}</h3>
+          <h3 className="text-[#F9FAFB] font-black text-base leading-tight truncate">{event.name}</h3>
           <div className="flex items-center gap-3 mt-1.5">
-            <span className="flex items-center gap-1 text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>
+            <span className="flex items-center gap-1 text-xs" style={{ color: '#F9FAFB' }}>
               <MapPin size={11} />{event.venue}
             </span>
             {event.time && (
-              <span className="flex items-center gap-1 text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>
+              <span className="flex items-center gap-1 text-xs" style={{ color: '#F9FAFB' }}>
                 <Clock size={11} />{event.time}
               </span>
             )}
@@ -112,14 +115,14 @@ const StudentEventCard: React.FC<EventCardProps> = ({ event, isRegistered, isCan
         </div>
       </div>
 
-      <p className="text-sm leading-relaxed mb-4 line-clamp-2" style={{ color: 'rgba(255,255,255,0.55)' }}>
+      <p className="text-sm leading-relaxed mb-4 line-clamp-2" style={{ color: '#F9FAFB' }}>
         {event.description}
       </p>
 
       {/* Seat bar */}
       {total > 0 && (
         <div className="mb-4">
-          <div className="flex justify-between text-xs mb-1.5" style={{ color: 'rgba(255,255,255,0.45)' }}>
+          <div className="flex justify-between text-xs mb-1.5" style={{ color: '#D1D5DB' }}>
             <span className="flex items-center gap-1"><Users size={11} /> {event.availableSeats} seats left</span>
             <span>{pct}% filled</span>
           </div>
@@ -127,7 +130,7 @@ const StudentEventCard: React.FC<EventCardProps> = ({ event, isRegistered, isCan
             <div className="h-full rounded-full transition-all duration-700"
               style={{
                 width: `${pct}%`,
-                background: pct >= 90 ? '#EF4444' : pct >= 60 ? '#F59E0B' : '#FF6B00'
+                background: pct >= 90 ? '#EF4444' : pct >= 60 ? '#F59E0B' : '#7C3AED'
               }} />
           </div>
         </div>
@@ -165,9 +168,9 @@ const StudentEventCard: React.FC<EventCardProps> = ({ event, isRegistered, isCan
         )}
         <a href={`/event/${event.id}`}
           className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-all"
-          style={{ background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.5)' }}
-          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#FF9A47'; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.5)'; }}>
+          style={{ background: 'rgba(255,255,255,0.06)', color: '#F9FAFB' }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#7C3AED'; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#F9FAFB'; }}>
           <ChevronRight size={16} />
         </a>
       </div>
@@ -199,7 +202,7 @@ const CalendarView: React.FC<{ events: Event[] }> = ({ events }) => {
       <div className="glass-card rounded-2xl p-6 mb-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-white font-black text-lg">{MONTHS[curr.month]} {curr.year}</h3>
+          <h3 className="text-[#F9FAFB] font-black text-lg">{MONTHS[curr.month]} {curr.year}</h3>
           <div className="flex gap-2">
             <button onClick={() => setCurr(p => {
               const m = p.month === 0 ? 11 : p.month - 1;
@@ -218,7 +221,7 @@ const CalendarView: React.FC<{ events: Event[] }> = ({ events }) => {
         <div className="grid grid-cols-7 mb-2">
           {DAYS.map(d => (
             <div key={d} className="text-center text-xs font-bold py-2"
-              style={{ color: 'rgba(255,255,255,0.35)' }}>{d}</div>
+              style={{ color: '#9CA3AF' }}>{d}</div>
           ))}
         </div>
 
@@ -235,7 +238,7 @@ const CalendarView: React.FC<{ events: Event[] }> = ({ events }) => {
             return (
               <button key={day} onClick={() => setSelected(isSelected ? null : key)}
                 className={`cal-day ${isCurrentDay ? 'today' : ''} ${hasEvent && !isCurrentDay ? 'has-event' : ''} ${isSelected ? 'ring-2' : ''}`}
-                style={isSelected ? { ringColor: '#FF6B00' } : {}}>
+                style={isSelected ? { ringColor: '#7C3AED' } : {}}>
                 {day}
               </button>
             );
@@ -251,19 +254,19 @@ const CalendarView: React.FC<{ events: Event[] }> = ({ events }) => {
           return dt.getFullYear() === y && dt.getMonth() === m && dt.getDate() === d;
         });
         if (dayEvents.length === 0) return (
-          <p className="text-center text-sm py-6" style={{ color: 'rgba(255,255,255,0.35)' }}>No events on this day</p>
+          <p className="text-center text-sm py-6" style={{ color: '#9CA3AF' }}>No events on this day</p>
         );
         return (
           <div className="space-y-3">
-            <p className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.4)' }}>
+            <p className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: '#D1D5DB' }}>
               Events on {MONTHS[m]} {d}
             </p>
             {dayEvents.map(ev => (
               <div key={ev.id} className="glass-card rounded-xl p-4 flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ background: '#FF6B00' }} />
+                <div className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ background: '#7C3AED' }} />
                 <div>
-                  <p className="text-white font-bold text-sm">{ev.name}</p>
-                  <p className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                  <p className="text-[#F9FAFB] font-bold text-sm">{ev.name}</p>
+                  <p className="text-xs mt-0.5" style={{ color: '#D1D5DB' }}>
                     <MapPin size={10} className="inline mr-1" />{ev.venue}
                     {ev.time && <><Clock size={10} className="inline ml-2 mr-1" />{ev.time}</>}
                   </p>
@@ -365,31 +368,15 @@ export default function StudentDashboard() {
       {/* ── SIDEBAR ──────────────────────────────────────────── */}
       <aside className="sidebar">
         {/* Brand */}
-        <div className="flex items-center gap-2.5 px-5 py-5 border-b"
-          style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-            style={{ background: 'linear-gradient(135deg,#FF6B00,#E05E00)' }}>
-            <Zap size={16} className="text-white" />
-          </div>
+        <div className="flex items-center gap-2.5 px-5 py-6 border-b"
+          style={{ borderColor: '#374151' }}>
+          <img src={logo} alt="Evenza Logo" className="w-9 h-9 object-contain" />
           <div>
-            <p className="text-white font-black text-base leading-none">Evenza</p>
-            <p className="text-xs leading-none mt-0.5" style={{ color: 'rgba(255,255,255,0.35)' }}>Student Portal</p>
+            <p className="text-[#F9FAFB] font-bold text-xl font-dancing tracking-wide">Evenza</p>
+            <p className="text-[10px] uppercase font-bold tracking-widest mt-0.5" style={{ color: '#9CA3AF' }}>Student Portal</p>
           </div>
         </div>
 
-        {/* User info */}
-        <div className="px-5 py-4 border-b" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full flex items-center justify-center font-black text-sm"
-              style={{ background: 'rgba(255,107,0,0.2)', color: '#FF9A47' }}>
-              {user?.name?.charAt(0).toUpperCase()}
-            </div>
-            <div className="min-w-0">
-              <p className="text-white font-semibold text-sm truncate">{user?.name}</p>
-              <p className="text-xs truncate" style={{ color: 'rgba(255,255,255,0.4)' }}>Roll: {user?.rollNo}</p>
-            </div>
-          </div>
-        </div>
 
         {/* Navigation */}
         <nav className="flex-1 py-4 space-y-1 overflow-y-auto">
@@ -401,7 +388,7 @@ export default function StudentDashboard() {
               {label}
               {id === 'my-events' && myEvents.length > 0 && (
                 <span className="ml-auto text-xs font-bold px-2 py-0.5 rounded-full"
-                  style={{ background: 'rgba(255,107,0,0.2)', color: '#FF9A47' }}>
+                  style={{ background: 'rgba(124, 58, 237, 0.2)', color: '#A78BFA' }}>
                   {myEvents.length}
                 </span>
               )}
@@ -416,10 +403,25 @@ export default function StudentDashboard() {
         </nav>
 
         {/* Sidebar footer */}
-        <div className="px-3 py-4 space-y-2 border-t" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
+        <div className="mt-auto px-3 py-4 space-y-2 border-t" style={{ borderColor: '#374151' }}>
           <button onClick={sendNotification} className="nav-item w-full text-left">
             <Bell size={18} /> Notifications
           </button>
+          
+          {/* Moved User info here */}
+          <div className="px-2 py-3 mb-2 rounded-xl" style={{ background: 'rgba(124, 58, 237, 0.05)', border: '1px solid rgba(124, 58, 237, 0.1)' }}>
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full flex items-center justify-center font-black text-sm"
+                style={{ background: 'linear-gradient(135deg, #7C3AED, #5B21B6)', color: '#fff' }}>
+                {user?.name?.charAt(0).toUpperCase()}
+              </div>
+              <div className="min-w-0">
+                <p className="text-[#F9FAFB] font-bold text-sm truncate">{user?.name}</p>
+                <p className="text-[10px] font-medium truncate" style={{ color: '#D1D5DB' }}>Roll: {user?.rollNo}</p>
+              </div>
+            </div>
+          </div>
+
           <button onClick={() => { logout(); navigate('/'); }}
             className="nav-item w-full text-left"
             style={{ color: 'rgba(239,68,68,0.7)' }}
@@ -434,8 +436,8 @@ export default function StudentDashboard() {
       <main className="main-content flex-1 p-8">
         {loading ? (
           <div className="loading-overlay">
-            <Loader2 size={40} className="animate-spin" style={{ color: '#FF6B00' }} />
-            <p className="text-sm font-semibold" style={{ color: 'rgba(255,255,255,0.5)' }}>Loading your data...</p>
+            <Loader2 size={40} className="animate-spin" style={{ color: '#7C3AED' }} />
+            <p className="text-sm font-semibold" style={{ color: '#F9FAFB' }}>Loading your data...</p>
           </div>
         ) : (
           <>
@@ -445,15 +447,15 @@ export default function StudentDashboard() {
                 {/* Header */}
                 <div className="flex items-start justify-between mb-8">
                   <div>
-                    <h1 className="text-3xl font-black text-white">
-                      Welcome, <span style={{ color: '#FF9A47' }}>{user?.name?.split(' ')[0]}</span> 👋
+                    <h1 className="text-3xl font-black text-purple-600">
+                      Welcome, <span style={{ color: '#ffae00ff' }}>{user?.name?.split(' ')[0]}</span> 👋
                     </h1>
-                    <p className="mt-1 text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                    <p className="mt-1 text-sm text-purple-600">
                       Here's your event activity at a glance
                     </p>
                   </div>
                   <button onClick={triggerRefresh}
-                    className="btn-ghost px-3 py-2 rounded-xl text-xs flex items-center gap-2">
+                    className="btn-ghost px-3 py-2 rounded-xl text-xs text-purple-600 flex items-center gap-2 border-purple-600">
                     <RefreshCw size={14} /> Refresh
                   </button>
                 </div>
@@ -461,7 +463,7 @@ export default function StudentDashboard() {
                 {/* Stats */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                   {[
-                    { label: 'Total Events', value: allEvents.length, icon: Calendar, color: '#FF6B00' },
+                    { label: 'Total Events', value: allEvents.length, icon: Calendar, color: '#7C3AED' },
                     { label: 'Registered', value: myEvents.length, icon: BookmarkCheck, color: '#10B981' },
                     { label: 'Today\'s Events', value: todayEvents.length, icon: Zap, color: '#F59E0B' },
                   ].map(({ label, value, icon: Icon, color }) => (
@@ -471,8 +473,8 @@ export default function StudentDashboard() {
                         <Icon size={22} style={{ color }} />
                       </div>
                       <div>
-                        <p className="text-3xl font-black text-white">{value}</p>
-                        <p className="text-xs font-semibold" style={{ color: 'rgba(255,255,255,0.45)' }}>{label}</p>
+                        <p className="text-3xl font-black text-[#F9FAFB]">{value}</p>
+                        <p className="text-xs font-semibold text-purple-600">{label}</p>
                       </div>
                     </div>
                   ))}
@@ -483,7 +485,7 @@ export default function StudentDashboard() {
                   <div className="mb-8">
                     <div className="flex items-center gap-2 mb-4">
                       <div className="w-2 h-5 rounded-full" style={{ background: '#FF6B00' }} />
-                      <h2 className="text-white font-black">Today's Events</h2>
+                      <h2 className="text-purple-600 font-black">Today's Events</h2>
                       <span className="badge badge-orange ml-2">{todayEvents.length}</span>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -503,11 +505,10 @@ export default function StudentDashboard() {
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-5 rounded-full" style={{ background: '#FF6B00' }} />
-                      <h2 className="text-white font-black">Upcoming Events</h2>
+                      <h2 className="text-purple-600 font-black">Upcoming Events</h2>
                     </div>
                     <button onClick={() => setSection('events')}
-                      className="text-xs font-bold flex items-center gap-1 transition-colors"
-                      style={{ color: '#FF9A47' }}>
+                      className="text-xs font-bold flex items-center gap-1 transition-colors text-purple-600">
                       View All <ChevronRight size={14} />
                     </button>
                   </div>
@@ -522,8 +523,8 @@ export default function StudentDashboard() {
                   </div>
                   {allEvents.length === 0 && (
                     <div className="glass-card rounded-2xl p-12 text-center">
-                      <Calendar size={40} className="mx-auto mb-3" style={{ color: 'rgba(255,255,255,0.2)' }} />
-                      <p className="text-sm" style={{ color: 'rgba(255,255,255,0.35)' }}>No events available yet.</p>
+                      <Calendar size={40} className="mx-auto mb-3" style={{ color: '#9CA3AF' }} />
+                      <p className="text-sm text-purple-600">No events available yet.</p>
                     </div>
                   )}
                 </div>
@@ -535,8 +536,8 @@ export default function StudentDashboard() {
               <div className="animate-fade-in">
                 <div className="flex items-start justify-between mb-8">
                   <div>
-                    <h1 className="text-3xl font-black text-white">All Events</h1>
-                    <p className="mt-1 text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                    <h1 className="text-3xl font-black text-purple-600">All Events</h1>
+                    <p className="mt-1 text-sm text-purple-600">
                       {allEvents.length} events available — register to secure your spot
                     </p>
                   </div>
@@ -544,8 +545,7 @@ export default function StudentDashboard() {
 
                 {/* Search */}
                 <div className="relative mb-6">
-                  <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2"
-                    style={{ color: 'rgba(255,255,255,0.4)' }} />
+                  <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-600" />
                   <input type="text" value={search} onChange={e => setSearch(e.target.value)}
                     className="input-field pl-10" placeholder="Search events by name or venue..." />
                 </div>
@@ -560,8 +560,8 @@ export default function StudentDashboard() {
                   ))}
                   {filteredAll.length === 0 && (
                     <div className="col-span-full glass-card rounded-2xl p-12 text-center">
-                      <Search size={40} className="mx-auto mb-3" style={{ color: 'rgba(255,255,255,0.2)' }} />
-                      <p className="text-sm" style={{ color: 'rgba(255,255,255,0.35)' }}>No events match your search.</p>
+                      <Search size={40} className="mx-auto mb-3 text-purple-600" />
+                      <p className="text-sm" style={{ color: '#9CA3AF' }}>No events match your search.</p>
                     </div>
                   )}
                 </div>
@@ -573,8 +573,8 @@ export default function StudentDashboard() {
               <div className="animate-fade-in">
                 <div className="flex items-start justify-between mb-8">
                   <div>
-                    <h1 className="text-3xl font-black text-white">My Events</h1>
-                    <p className="mt-1 text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                    <h1 className="text-3xl font-black text-purple-600">My Events</h1>
+                    <p className="mt-1 text-sm text-purple-600">
                       {myEvents.length} events you're registered for
                     </p>
                   </div>
@@ -591,9 +591,9 @@ export default function StudentDashboard() {
                   ))}
                   {myEvents.length === 0 && (
                     <div className="col-span-full glass-card rounded-2xl p-12 text-center">
-                      <BookmarkCheck size={40} className="mx-auto mb-3" style={{ color: 'rgba(255,255,255,0.2)' }} />
-                      <p className="font-bold text-white mb-1">No registrations yet</p>
-                      <p className="text-sm" style={{ color: 'rgba(255,255,255,0.35)' }}>Browse events and register to see them here.</p>
+                      <BookmarkCheck size={40} className="mx-auto mb-3 text-purple-600" />
+                      <p className="font-bold text-purple-600 mb-1">No registrations yet</p>
+                      <p className="text-sm text-purple-600">Browse events and register to see them here.</p>
                       <button onClick={() => setSection('events')}
                         className="btn-orange mt-4 px-6 py-2.5 text-sm rounded-lg inline-flex">
                         Browse Events
@@ -608,8 +608,8 @@ export default function StudentDashboard() {
             {section === 'cancelled' && (
               <div className="animate-fade-in">
                 <div className="mb-8">
-                  <h1 className="text-3xl font-black text-white">Cancelled Events</h1>
-                  <p className="mt-1 text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                  <h1 className="text-3xl font-black text-purple-600">Cancelled Events</h1>
+                  <p className="mt-1 text-sm text-purple-600">
                     Events you cancelled — re-register if seats are still available
                   </p>
                 </div>
@@ -620,8 +620,8 @@ export default function StudentDashboard() {
                   ))}
                   {cancelledEvents.length === 0 && (
                     <div className="col-span-full glass-card rounded-2xl p-12 text-center">
-                      <XCircle size={40} className="mx-auto mb-3" style={{ color: 'rgba(255,255,255,0.2)' }} />
-                      <p className="text-sm" style={{ color: 'rgba(255,255,255,0.35)' }}>No cancelled events.</p>
+                      <XCircle size={40} className="mx-auto mb-3 text-purple-600" />
+                      <p className="text-sm text-purple-600">No cancelled events.</p>
                     </div>
                   )}
                 </div>
@@ -632,8 +632,8 @@ export default function StudentDashboard() {
             {section === 'calendar' && (
               <div className="animate-fade-in">
                 <div className="mb-8">
-                  <h1 className="text-3xl font-black text-white">Calendar</h1>
-                  <p className="mt-1 text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                  <h1 className="text-3xl font-black text-purple-600">Calendar</h1>
+                  <p className="mt-1 text-sm text-purple-600">
                     Click a highlighted date to see events
                   </p>
                 </div>

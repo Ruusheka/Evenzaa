@@ -15,21 +15,21 @@ const QRModal: React.FC<{ event: Event; rollNo: number; onClose: () => void }> =
   const qrUrl  = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(qrData)}&size=220x220&bgcolor=ffffff`;
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4"
-         style={{ background: 'rgba(5,13,26,0.85)', backdropFilter: 'blur(8px)' }}>
+         style={{ background: 'rgba(17,24,39,0.9)', backdropFilter: 'blur(8px)' }}>
       <div className="rounded-2xl p-8 max-w-sm w-full text-center relative"
-           style={{ background: 'linear-gradient(180deg,#1A3A6B,#0F2241)', border: '1px solid rgba(255,255,255,0.1)' }}>
-        <button onClick={onClose} className="absolute top-4 right-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
+           style={{ background: 'linear-gradient(180deg,#1F2937,#111827)', border: '1px solid #374151' }}>
+        <button onClick={onClose} className="absolute top-4 right-4" style={{ color: '#9CA3AF' }}>
           <X size={20} />
         </button>
-        <Zap size={24} className="mx-auto mb-3" style={{ color: '#FF6B00' }} />
-        <h3 className="text-white font-black text-lg mb-1">{event.name}</h3>
-        <p className="text-xs mb-6" style={{ color: 'rgba(255,255,255,0.45)' }}>
+        <Zap size={24} className="mx-auto mb-3" style={{ color: '#7C3AED' }} />
+        <h3 className="text-[#F9FAFB] font-black text-lg mb-1">{event.name}</h3>
+        <p className="text-xs mb-6" style={{ color: '#D1D5DB' }}>
           Check-in QR Code &bull; Roll No: {rollNo}
         </p>
         <div className="qr-container mx-auto mb-4">
           <img src={qrUrl} alt="QR Code" className="w-56 h-56 mx-auto" />
         </div>
-        <p className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>Show this at the event venue for check-in</p>
+        <p className="text-xs" style={{ color: '#9CA3AF' }}>Show this at the event venue for check-in</p>
       </div>
     </div>
   );
@@ -90,15 +90,15 @@ export default function EventDetails() {
 
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center">
-      <Loader2 size={48} className="animate-spin" style={{ color: '#FF6B00' }} />
+      <Loader2 size={48} className="animate-spin" style={{ color: '#7C3AED' }} />
     </div>
   );
 
   if (!event) return (
     <div className="min-h-screen flex items-center justify-center p-8">
       <div className="text-center">
-        <AlertCircle size={48} className="mx-auto mb-4" style={{ color: 'rgba(255,255,255,0.3)' }} />
-        <h2 className="text-white font-black text-2xl mb-2">Event Not Found</h2>
+        <AlertCircle size={48} className="mx-auto mb-4" style={{ color: '#9CA3AF' }} />
+        <h2 className="text-[#F9FAFB] font-black text-2xl mb-2">Event Not Found</h2>
         <button onClick={() => navigate(-1)}
           className="btn-orange px-6 py-2.5 text-sm rounded-xl mt-4 inline-flex">
           Go Back
@@ -120,9 +120,9 @@ export default function EventDetails() {
       {/* Back button */}
       <button onClick={() => navigate(backPath)}
         className="flex items-center gap-2 mb-8 text-sm font-semibold transition-colors"
-        style={{ color: 'rgba(255,255,255,0.55)' }}
-        onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FF9A47'}
-        onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.55)'}>
+        style={{ color: '#F9FAFB' }}
+        onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#A78BFA'}
+        onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#F9FAFB'}>
         <ArrowLeft size={18} /> Back to Dashboard
       </button>
 
@@ -141,7 +141,7 @@ export default function EventDetails() {
               }
             </div>
 
-            <h1 className="text-3xl font-black text-white mb-6 leading-tight">
+            <h1 className="text-3xl font-black text-[#F9FAFB] mb-6 leading-tight">
               {event.name}
             </h1>
 
@@ -153,15 +153,15 @@ export default function EventDetails() {
                 { icon: Users,    label: 'Seats', value: total > 0 ? `${available} of ${total} available` : 'Unlimited' },
               ].map(({ icon: Icon, label, value }) => (
                 <div key={label} className="flex items-start gap-3 rounded-xl p-4"
-                     style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                     style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid #374151' }}>
                   <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
-                       style={{ background: 'rgba(255,107,0,0.15)' }}>
-                    <Icon size={18} style={{ color: '#FF9A47' }} />
+                       style={{ background: 'rgba(124, 58, 237, 0.15)' }}>
+                    <Icon size={18} style={{ color: '#A78BFA' }} />
                   </div>
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-wide mb-0.5"
-                       style={{ color: 'rgba(255,255,255,0.4)' }}>{label}</p>
-                    <p className="text-white font-semibold text-sm">{value}</p>
+                       style={{ color: '#D1D5DB' }}>{label}</p>
+                    <p className="text-[#F9FAFB] font-semibold text-sm">{value}</p>
                   </div>
                 </div>
               ))}
@@ -170,9 +170,9 @@ export default function EventDetails() {
 
           {/* Description */}
           <div className="glass-card rounded-2xl p-8">
-            <h2 className="text-white font-black mb-4">About This Event</h2>
+            <h2 className="text-[#F9FAFB] font-black mb-4">About This Event</h2>
             <p className="text-sm leading-relaxed whitespace-pre-wrap"
-               style={{ color: 'rgba(255,255,255,0.65)' }}>
+               style={{ color: '#D1D5DB' }}>
               {event.description}
             </p>
           </div>
@@ -180,8 +180,8 @@ export default function EventDetails() {
           {/* Faculty: registered students table */}
           {user?.role === 'FACULTY' && (
             <div className="glass-card rounded-2xl p-8">
-              <h2 className="text-white font-black mb-2">Registered Students</h2>
-              <p className="text-xs mb-5" style={{ color: 'rgba(255,255,255,0.4)' }}>
+              <h2 className="text-[#F9FAFB] font-black mb-2">Registered Students</h2>
+              <p className="text-xs mb-5" style={{ color: '#D1D5DB' }}>
                 {filled} student{filled !== 1 ? 's' : ''} enrolled
               </p>
 
@@ -189,20 +189,20 @@ export default function EventDetails() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                      <tr style={{ borderBottom: '1px solid #374151' }}>
                         {['#', 'Roll Number', 'Status'].map(h => (
                           <th key={h} className="text-left pb-3 pr-4 text-xs font-bold uppercase tracking-widest"
-                              style={{ color: 'rgba(255,255,255,0.35)' }}>{h}</th>
+                              style={{ color: '#9CA3AF' }}>{h}</th>
                         ))}
                       </tr>
                     </thead>
                     <tbody>
                       {event.registeredStudents.map((rollNo, i) => (
-                        <tr key={rollNo} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-                          <td className="py-3 pr-4 text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>{i + 1}</td>
+                        <tr key={rollNo} style={{ borderBottom: '1px solid #374151' }}>
+                          <td className="py-3 pr-4 text-xs" style={{ color: '#9CA3AF' }}>{i + 1}</td>
                           <td className="py-3 pr-4">
-                            <span className="flex items-center gap-2 font-bold text-white">
-                              <Hash size={13} style={{ color: '#FF9A47' }} />{rollNo}
+                            <span className="flex items-center gap-2 font-bold text-[#F9FAFB]">
+                              <Hash size={13} style={{ color: '#A78BFA' }} />{rollNo}
                             </span>
                           </td>
                           <td className="py-3">
@@ -215,8 +215,8 @@ export default function EventDetails() {
                 </div>
               ) : (
                 <div className="text-center py-8">
-                  <Users size={32} className="mx-auto mb-2" style={{ color: 'rgba(255,255,255,0.2)' }} />
-                  <p className="text-sm" style={{ color: 'rgba(255,255,255,0.35)' }}>No students enrolled yet.</p>
+                  <Users size={32} className="mx-auto mb-2" style={{ color: '#9CA3AF' }} />
+                  <p className="text-sm" style={{ color: '#9CA3AF' }}>No students enrolled yet.</p>
                 </div>
               )}
             </div>
@@ -228,15 +228,15 @@ export default function EventDetails() {
           <div className="sticky top-6 space-y-4">
             {/* Seat fill card */}
             <div className="glass-card rounded-2xl p-6">
-              <h3 className="text-white font-black mb-4">Enrollment</h3>
+              <h3 className="text-[#F9FAFB] font-black mb-4">Enrollment</h3>
 
               {total > 0 && (
                 <div className="mb-4">
                   <div className="flex justify-between text-xs mb-2">
-                    <span style={{ color: 'rgba(255,255,255,0.5)' }}>
+                    <span style={{ color: '#9CA3AF' }}>
                       <Users size={11} className="inline mr-1" />{filled} registered
                     </span>
-                    <span style={{ color: 'rgba(255,255,255,0.5)' }}>{pct}% filled</span>
+                    <span style={{ color: '#9CA3AF' }}>{pct}% filled</span>
                   </div>
                   <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
                     <div className="h-full rounded-full transition-all"
@@ -297,11 +297,11 @@ export default function EventDetails() {
               {/* Faculty info panel */}
               {user?.role === 'FACULTY' && (
                 <div className="rounded-xl p-4 text-center"
-                     style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                     style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid #374151' }}>
                   <p className="text-xs font-black uppercase tracking-widest mb-1"
-                     style={{ color: 'rgba(255,255,255,0.4)' }}>Faculty View</p>
-                  <p className="text-3xl font-black text-white">{filled}</p>
-                  <p className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.4)' }}>Total Registrations</p>
+                     style={{ color: '#D1D5DB' }}>Faculty View</p>
+                  <p className="text-3xl font-black text-[#F9FAFB]">{filled}</p>
+                  <p className="text-xs mt-1" style={{ color: '#D1D5DB' }}>Total Registrations</p>
                 </div>
               )}
             </div>
@@ -309,7 +309,7 @@ export default function EventDetails() {
             {/* Not logged in */}
             {!user && (
               <div className="glass-card rounded-2xl p-6 text-center">
-                <p className="text-white font-bold mb-3">Sign in to register</p>
+                <p className="text-[#F9FAFB] font-bold mb-3">Sign in to register</p>
                 <Link to="/" className="btn-orange w-full py-3 text-sm rounded-xl inline-flex">
                   Sign In
                 </Link>

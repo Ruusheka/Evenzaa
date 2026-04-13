@@ -22,8 +22,8 @@ export interface Event {
   id: string;
   name: string;
   description: string;
-  date: string;           // ISO date string e.g. "2026-04-15"
-  time?: string;          // e.g. "09:00 AM"
+  date: string;           
+  time?: string;          
   venue: string;
   facultyId: string;
   totalSeats: number;

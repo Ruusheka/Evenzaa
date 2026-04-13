@@ -4,6 +4,8 @@ import { Mail, Lock, User, Hash, ArrowRight, Loader2, Eye, EyeOff, GraduationCap
 import { useAuth } from '../context/AuthContext';
 import { api } from '../api';
 import toast from 'react-hot-toast';
+import logo from '../assets/logo.png';
+import heroImage from '../assets/image.png';
 
 type Tab = 'student' | 'faculty';
 type View = 'login' | 'register';
@@ -13,10 +15,10 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const { login, isAuthenticated, user } = useAuth();
 
-  const [tab, setTab]   = useState<Tab>(searchParams.get('tab') === 'faculty' ? 'faculty' : 'student');
+  const [tab, setTab] = useState<Tab>(searchParams.get('tab') === 'faculty' ? 'faculty' : 'student');
   const [view, setView] = useState<View>(searchParams.get('register') ? 'register' : 'login');
   const [showPass, setShowPass] = useState(false);
-  const [loading, setLoading]   = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Login form
   const [loginForm, setLoginForm] = useState({ email: '', password: '' });
@@ -108,270 +110,225 @@ export default function LoginPage() {
       <div
         className="hidden lg:flex lg:w-1/2 relative overflow-hidden flex-col justify-between p-12"
         style={{
-          background: 'linear-gradient(160deg, #0A172C 0%, #1A3A6B 60%, #243B6E 100%)',
+          background: 'linear-gradient(160deg, #111827 0%, #1F2937 60%, #111827 100%)',
         }}
       >
-        {/* Background geometric shapes */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-[-80px] right-[-80px] w-80 h-80 rounded-full opacity-10"
-               style={{ background: '#FF6B00' }} />
-          <div className="absolute bottom-[-60px] left-[-60px] w-64 h-64 rounded-full opacity-8"
-               style={{ background: '#FF6B00' }} />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-5"
-               style={{ background: 'radial-gradient(circle, #FF6B00, transparent)' }} />
+        <div className="absolute inset-0 z-0 opacity-12">
+          <img src={heroImage} alt="Hero" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-[#111827] via-transparent to-transparent" />
         </div>
 
-        {/* Logo / Brand */}
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-                 style={{ background: 'linear-gradient(135deg, #FF6B00, #E05E00)' }}>
-              <Zap size={20} className="text-white" />
+        {/* Minimal Branding Overlay */}
+        <div className="relative z-10 space-y-8">
+          <div className="flex items-center gap-4 group">
+            <div className="p-2 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 group-hover:bg-white/10 transition-all duration-500">
+              <img src={logo} alt="Evenza Logo" className="w-12 h-12 object-contain" />
             </div>
-            <span className="text-white text-2xl font-black tracking-tight">Evenza</span>
+            <span className="text-[#F9FAFB] text-4xl font-bold font-dancing tracking-wide">Evenza</span>
           </div>
-          <p className="text-sm font-medium" style={{ color: 'rgba(255,255,255,0.45)' }}>
-            Event Management Portal
-          </p>
+          
+          {/* <div className="space-y-4">
+            <h1 className="text-6xl font-black text-[#F9FAFB] leading-tight">
+              Ignite Your<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] to-[#FFA14A]">Campus Life</span>
+            </h1>
+            <p className="text-lg text-[#9CA3AF] max-w-sm leading-relaxed">
+              The premier destination for campus events, competitions, and coordination. 
+              Join the community today.
+            </p>
+          </div> */}
         </div>
 
-        {/* Central illustration content */}
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center py-16">
-          <div className="w-32 h-32 rounded-3xl mb-8 flex items-center justify-center mx-auto"
-               style={{ background: 'rgba(255,107,0,0.15)', border: '1px solid rgba(255,107,0,0.3)' }}>
-            <Calendar size={56} style={{ color: '#FF6B00' }} />
-          </div>
+        {/* <div className="relative z-10 flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-[#7C3AED]">
+          <span className="w-8 h-[1px] bg-[#7C3AED]"></span>
+          <span>Department of Student Affairs</span>
+        </div> */}
 
-          <h1 className="text-4xl font-black text-white mb-4 leading-tight">
-            Your Campus<br />
-            <span style={{ color: '#FF6B00' }}>Comes Alive</span><br />
-            Here
-          </h1>
-          <p className="text-base leading-relaxed max-w-sm"
-             style={{ color: 'rgba(255,255,255,0.55)' }}>
-            Discover events, track registrations, and manage every campus initiative — all in one place.
-          </p>
-
-          {/* Stats row */}
-          <div className="grid grid-cols-3 gap-4 mt-12 w-full max-w-sm">
-            {[
-              { icon: Calendar, label: 'Events', value: '50+' },
-              { icon: Users,    label: 'Students', value: '2K+' },
-              { icon: Zap,      label: 'Live',  value: '100%' },
-            ].map(({ icon: Icon, label, value }) => (
-              <div key={label} className="rounded-2xl p-4 text-center"
-                   style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                <Icon size={18} style={{ color: '#FF6B00', margin: '0 auto 6px' }} />
-                <p className="text-white font-black text-lg leading-none">{value}</p>
-                <p className="text-xs font-medium mt-1" style={{ color: 'rgba(255,255,255,0.4)' }}>{label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Footer quote */}
-        <div className="relative z-10">
-          <p className="text-xs italic" style={{ color: 'rgba(255,255,255,0.3)' }}>
-            "Every great event starts with a single registration."
-          </p>
-        </div>
       </div>
 
-      {/* ── RIGHT PANEL (login card) ─────────────────────────── */}
       <div
-        className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12"
-        style={{ background: 'linear-gradient(180deg, #0D1F40 0%, #12294D 100%)' }}
+        className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 relative overflow-hidden"
+        style={{ background: '#111827' }}
       >
-        <div className="w-full max-w-md">
+        {/* Decorative Glowing Elements */}
+        <div className="absolute top-[-10%] right-[-10%] w-[400px] h-[400px] rounded-full opacity-10 blur-[100px]"
+             style={{ background: '#7C3AED' }} />
+        <div className="absolute bottom-[20%] left-[-5%] w-[300px] h-[300px] rounded-full opacity-5 blur-[80px]"
+             style={{ background: '#5B21B6' }} />
 
-          {/* Mobile logo */}
-          <div className="flex items-center gap-3 mb-8 lg:hidden">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-                 style={{ background: 'linear-gradient(135deg, #FF6B00, #E05E00)' }}>
-              <Zap size={18} className="text-white" />
+        <div className="w-full max-w-md relative z-10">
+          {/* Glassmorphic Form Card */}
+          <div className="glass-card rounded-[2rem] p-8 sm:p-10 border-white/5 shadow-2xl animate-slide-up-fade">
+            
+            {/* Mobile logo */}
+            <div className="flex items-center gap-3 mb-10 lg:hidden justify-center text-center">
+              <img src={logo} alt="Evenza Logo" className="w-10 h-10 object-contain" />
+              <span className="text-[#F9FAFB] text-3xl font-bold font-dancing tracking-wide">Evenza</span>
             </div>
-            <span className="text-white text-xl font-black tracking-tight">Evenza</span>
-          </div>
 
-          {view === 'register' ? (
-            /* ── REGISTER FORM ──────────────────────────────── */
-            <>
-              <div className="mb-8">
-                <h2 className="text-3xl font-black text-white mb-1">Create Account</h2>
-                <p style={{ color: 'rgba(255,255,255,0.5)' }} className="text-sm">Join Evenza as a student</p>
-              </div>
+            {view === 'register' ? (
+              /* ── REGISTER FORM ──────────────────────────────── */
+              <>
+                <div className="mb-10 text-center">
+                  <h2 className="text-4xl font-black text-[#F9FAFB] mb-2 tracking-tight">Join Evenza</h2>
+                  <p style={{ color: '#D1D5DB' }} className="text-sm font-medium">Create your student account</p>
+                </div>
 
-              <form onSubmit={handleRegister} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  {/* Full Name */}
-                  <div className="col-span-2">
-                    <label className="form-label">Full Name</label>
-                    <div className="relative">
-                      <User size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2"
-                            style={{ color: 'rgba(255,255,255,0.35)' }} />
-                      <input type="text" required value={regForm.name}
-                        onChange={e => setRegForm(p => ({ ...p, name: e.target.value }))}
-                        className="input-field pl-10" placeholder="Arjun Kumar" />
+                <form onSubmit={handleRegister} className="space-y-6">
+                  <div className="grid grid-cols-2 gap-5">
+                    {/* Full Name */}
+                    <div className="col-span-2">
+                      <label className="form-label mb-2 block">Full Name</label>
+                      <div className="group relative">
+                        <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#7C3AED]"
+                              style={{ color: '#9CA3AF' }} />
+                        <input type="text" required value={regForm.name}
+                          onChange={e => setRegForm(p => ({ ...p, name: e.target.value }))}
+                          className="input-field pl-12 bg-white/5 border-white/10 focus:bg-white/10 transition-all py-4" placeholder="Arjun Kumar" />
+                      </div>
+                    </div>
+
+                    {/* Roll No */}
+                    <div>
+                      <label className="form-label mb-2 block">Roll Number</label>
+                      <div className="group relative">
+                        <Hash size={18} className="absolute left-4 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#7C3AED]"
+                              style={{ color: '#9CA3AF' }} />
+                        <input type="number" required value={regForm.rollNo}
+                          onChange={e => setRegForm(p => ({ ...p, rollNo: e.target.value }))}
+                          className="input-field pl-12 bg-white/5 border-white/10 focus:bg-white/10 transition-all py-4" placeholder="23001" />
+                      </div>
+                    </div>
+
+                    {/* Department */}
+                    <div>
+                      <label className="form-label mb-2 block">Department</label>
+                      <input type="text" required value={regForm.department}
+                        onChange={e => setRegForm(p => ({ ...p, department: e.target.value }))}
+                        className="input-field bg-white/5 border-white/10 focus:bg-white/10 transition-all py-4" placeholder="CSE" />
                     </div>
                   </div>
 
-                  {/* Roll No */}
+                  {/* Email */}
                   <div>
-                    <label className="form-label">Roll Number</label>
-                    <div className="relative">
-                      <Hash size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2"
-                            style={{ color: 'rgba(255,255,255,0.35)' }} />
-                      <input type="number" required value={regForm.rollNo}
-                        onChange={e => setRegForm(p => ({ ...p, rollNo: e.target.value }))}
-                        className="input-field pl-10" placeholder="23001" />
+                    <label className="form-label mb-2 block">Institution Email</label>
+                    <div className="group relative">
+                      <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#7C3AED]"
+                            style={{ color: '#9CA3AF' }} />
+                      <input type="email" required value={regForm.email}
+                        onChange={e => setRegForm(p => ({ ...p, email: e.target.value }))}
+                        className="input-field pl-12 bg-white/5 border-white/10 focus:bg-white/10 transition-all py-4" placeholder="student@ssn.edu.in" />
                     </div>
                   </div>
 
-                  {/* Department */}
+                  {/* Password */}
                   <div>
-                    <label className="form-label">Department</label>
-                    <input type="text" required value={regForm.department}
-                      onChange={e => setRegForm(p => ({ ...p, department: e.target.value }))}
-                      className="input-field" placeholder="CSE" />
+                    <label className="form-label mb-2 block">Secure Password</label>
+                    <div className="group relative">
+                      <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#7C3AED]"
+                            style={{ color: '#9CA3AF' }} />
+                      <input type={showPass ? 'text' : 'password'} required value={regForm.password}
+                        onChange={e => setRegForm(p => ({ ...p, password: e.target.value }))}
+                        className="input-field pl-12 pr-12 bg-white/5 border-white/10 focus:bg-white/10 transition-all py-4" placeholder="••••••••" />
+                      <button type="button" onClick={() => setShowPass(p => !p)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 hover:text-[#F9FAFB] transition-colors"
+                        style={{ color: '#9CA3AF' }}>
+                        {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
+                      </button>
+                    </div>
                   </div>
-                </div>
 
-                {/* Email */}
-                <div>
-                  <label className="form-label">Email</label>
-                  <div className="relative">
-                    <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2"
-                          style={{ color: 'rgba(255,255,255,0.35)' }} />
-                    <input type="email" required value={regForm.email}
-                      onChange={e => setRegForm(p => ({ ...p, email: e.target.value }))}
-                      className="input-field pl-10" placeholder="student@ssn.edu.in" />
-                  </div>
-                </div>
+                  <button type="submit" disabled={loading}
+                    className="btn-orange w-full py-4 mt-4 text-base font-bold rounded-2xl shadow-[0_8px_30px_rgb(124,58,237,0.3)] hover:shadow-[0_8px_40px_rgb(124,58,237,0.5)] transition-all">
+                    {loading ? <Loader2 size={24} className="animate-spin" /> : <>Complete Registration <ArrowRight size={20} /></>}
+                  </button>
+                </form>
 
-                {/* Password */}
-                <div>
-                  <label className="form-label">Password</label>
-                  <div className="relative">
-                    <Lock size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2"
-                          style={{ color: 'rgba(255,255,255,0.35)' }} />
-                    <input type={showPass ? 'text' : 'password'} required value={regForm.password}
-                      onChange={e => setRegForm(p => ({ ...p, password: e.target.value }))}
-                      className="input-field pl-10 pr-10" placeholder="••••••••" />
-                    <button type="button" onClick={() => setShowPass(p => !p)}
-                      className="absolute right-3.5 top-1/2 -translate-y-1/2"
-                      style={{ color: 'rgba(255,255,255,0.4)' }}>
-                      {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
-                    </button>
-                  </div>
-                </div>
-
-                <button type="submit" disabled={loading}
-                  className="btn-orange w-full py-3.5 mt-2 text-sm font-bold rounded-xl"
-                  style={{ marginTop: '8px' }}>
-                  {loading ? <Loader2 size={18} className="animate-spin" /> : <>Create Account <ArrowRight size={16} /></>}
-                </button>
-              </form>
-
-              <p className="mt-6 text-center text-sm" style={{ color: 'rgba(255,255,255,0.45)' }}>
-                Already have an account?{' '}
-                <button onClick={() => setView('login')}
-                  className="font-bold" style={{ color: '#FF9A47' }}>
-                  Sign in
-                </button>
-              </p>
-            </>
-          ) : (
-            /* ── LOGIN FORM ─────────────────────────────────── */
-            <>
-              <div className="mb-8">
-                <h2 className="text-3xl font-black text-white mb-1">Welcome Back</h2>
-                <p style={{ color: 'rgba(255,255,255,0.5)' }} className="text-sm">
-                  Evenza – Event Management Portal
-                </p>
-              </div>
-
-              {/* Tabs */}
-              <div className="flex rounded-xl p-1 mb-8"
-                   style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                <button
-                  onClick={() => setTab('student')}
-                  className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-bold transition-all ${
-                    tab === 'student'
-                      ? 'text-white shadow-md'
-                      : 'hover:text-white'
-                  }`}
-                  style={tab === 'student'
-                    ? { background: 'linear-gradient(135deg, #FF6B00, #E05E00)', color: '#fff' }
-                    : { color: 'rgba(255,255,255,0.5)' }}>
-                  <GraduationCap size={16} /> Student
-                </button>
-                <button
-                  onClick={() => setTab('faculty')}
-                  className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-bold transition-all ${
-                    tab === 'faculty'
-                      ? 'text-white shadow-md'
-                      : 'hover:text-white'
-                  }`}
-                  style={tab === 'faculty'
-                    ? { background: 'linear-gradient(135deg, #FF6B00, #E05E00)', color: '#fff' }
-                    : { color: 'rgba(255,255,255,0.5)' }}>
-                  <Briefcase size={16} /> Faculty
-                </button>
-              </div>
-
-              <form onSubmit={tab === 'student' ? handleStudentLogin : handleFacultyLogin} className="space-y-4">
-                {/* Email */}
-                <div>
-                  <label className="form-label">Email Address</label>
-                  <div className="relative">
-                    <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2"
-                          style={{ color: 'rgba(255,255,255,0.35)' }} />
-                    <input type="email" required value={loginForm.email}
-                      onChange={e => setLoginForm(p => ({ ...p, email: e.target.value }))}
-                      className="input-field pl-10"
-                      placeholder={tab === 'student' ? 'student@ssn.edu.in' : 'faculty@ssn.edu.in'} />
-                  </div>
-                </div>
-
-                {/* Password */}
-                <div>
-                  <label className="form-label">Password</label>
-                  <div className="relative">
-                    <Lock size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2"
-                          style={{ color: 'rgba(255,255,255,0.35)' }} />
-                    <input type={showPass ? 'text' : 'password'} required value={loginForm.password}
-                      onChange={e => setLoginForm(p => ({ ...p, password: e.target.value }))}
-                      className="input-field pl-10 pr-10" placeholder="••••••••" />
-                    <button type="button" onClick={() => setShowPass(p => !p)}
-                      className="absolute right-3.5 top-1/2 -translate-y-1/2"
-                      style={{ color: 'rgba(255,255,255,0.4)' }}>
-                      {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
-                    </button>
-                  </div>
-                </div>
-
-                <button type="submit" disabled={loading}
-                  className="btn-orange w-full py-3.5 text-sm font-bold rounded-xl"
-                  style={{ marginTop: '8px' }}>
-                  {loading
-                    ? <Loader2 size={18} className="animate-spin" />
-                    : <>Sign In <ArrowRight size={16} /></>
-                  }
-                </button>
-              </form>
-
-              {/* Register link (student only) */}
-              {tab === 'student' && (
-                <p className="mt-6 text-center text-sm" style={{ color: 'rgba(255,255,255,0.45)' }}>
-                  New student?{' '}
-                  <button onClick={() => setView('register')}
-                    className="font-bold" style={{ color: '#FF9A47' }}>
-                    Create account
+                <p className="mt-8 text-center text-sm" style={{ color: '#9CA3AF' }}>
+                  Already part of Evenza?{' '}
+                  <button onClick={() => setView('login')}
+                    className="font-bold text-[#F9FAFB] hover:text-[#A78BFA] transition-colors underline underline-offset-4 decoration-[#7C3AED]/40 hover:decoration-[#7C3AED]">
+                    Sign in here
                   </button>
                 </p>
-              )}
-            </>
-          )}
+              </>
+            ) : (
+              /* ── LOGIN FORM ─────────────────────────────────── */
+              <>
+                <div className="mb-10 text-center">
+                  <h2 className="text-4xl font-black text-[#F9FAFB] mb-2 tracking-tight">Welcome Back</h2>
+                  <p style={{ color: '#D1D5DB' }} className="text-sm font-medium">Log in to your portal</p>
+                </div>
+
+                {/* Tabs */}
+                <div className="flex rounded-2xl p-1.5 mb-10 bg-white/5 border border-white/10 backdrop-blur-sm">
+                  <button
+                    onClick={() => setTab('student')}
+                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${tab === 'student' ? 'text-[#F9FAFB] shadow-lg scale-[1.02]' : 'hover:bg-white/5 grayscale text-[#9CA3AF]'}`}
+                    style={tab === 'student' ? { background: 'linear-gradient(135deg, #7C3AED, #5B21B6)' } : {}}>
+                    <GraduationCap size={18} /> Student
+                  </button>
+                  <button
+                    onClick={() => setTab('faculty')}
+                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${tab === 'faculty' ? 'text-[#F9FAFB] shadow-lg scale-[1.02]' : 'hover:bg-white/5 grayscale text-[#9CA3AF]'}`}
+                    style={tab === 'faculty' ? { background: 'linear-gradient(135deg, #7C3AED, #5B21B6)' } : {}}>
+                    <Briefcase size={18} /> Faculty
+                  </button>
+                </div>
+
+                <form onSubmit={tab === 'student' ? handleStudentLogin : handleFacultyLogin} className="space-y-6">
+                  {/* Email */}
+                  <div>
+                    <label className="form-label mb-2 block">Email Address</label>
+                    <div className="group relative">
+                      <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#7C3AED]"
+                            style={{ color: '#9CA3AF' }} />
+                      <input type="email" required value={loginForm.email}
+                        onChange={e => setLoginForm(p => ({ ...p, email: e.target.value }))}
+                        className="input-field pl-12 bg-white/5 border-white/10 focus:bg-white/10 transition-all py-4"
+                        placeholder={tab === 'student' ? 'student@ssn.edu.in' : 'faculty@ssn.edu.in'} />
+                    </div>
+                  </div>
+
+                  {/* Password */}
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <label className="form-label">Password</label>
+                      <button type="button" className="text-[10px] uppercase font-bold tracking-widest text-[#9CA3AF] hover:text-[#7C3AED] transition-colors">Forgot?</button>
+                    </div>
+                    <div className="group relative">
+                      <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#7C3AED]"
+                            style={{ color: '#9CA3AF' }} />
+                      <input type={showPass ? 'text' : 'password'} required value={loginForm.password}
+                        onChange={e => setLoginForm(p => ({ ...p, password: e.target.value }))}
+                        className="input-field pl-12 pr-12 bg-white/5 border-white/10 focus:bg-white/10 transition-all py-4" placeholder="••••••••" />
+                      <button type="button" onClick={() => setShowPass(p => !p)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 hover:text-[#F9FAFB] transition-colors"
+                        style={{ color: '#9CA3AF' }}>
+                        {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
+                      </button>
+                    </div>
+                  </div>
+
+                  <button type="submit" disabled={loading}
+                    className="btn-orange w-full py-4 text-base font-bold shadow-[0_8px_30px_rgb(124,58,237,0.3)] hover:shadow-[0_8px_40px_rgb(124,58,237,0.5)] transition-all rounded-2xl flex items-center justify-center gap-3">
+                    {loading ? <Loader2 size={24} className="animate-spin" /> : <>Sign In Now <ArrowRight size={20} /></>}
+                  </button>
+                </form>
+
+                {/* Register link (student only) */}
+                {tab === 'student' && (
+                  <p className="mt-10 text-center text-sm" style={{ color: '#9CA3AF' }}>
+                    New to Evenza?{' '}
+                    <button onClick={() => setView('register')}
+                      className="font-bold text-[#F9FAFB] hover:text-[#A78BFA] transition-colors underline underline-offset-4 decoration-[#7C3AED]/40 hover:decoration-[#7C3AED]">
+                      Create institutional account
+                    </button>
+                  </p>
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

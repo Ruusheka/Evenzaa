@@ -9,6 +9,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { api } from '../api';
 import { Event } from '../types';
 import toast from 'react-hot-toast';
+import logo from '../assets/logo.png';
 
 type Section = 'home' | 'launch' | 'events' | 'analytics';
 
@@ -30,13 +31,13 @@ function isToday(d: string) {
 // ── Delete Confirm Modal ─────────────────────────────────────────
 const DeleteModal: React.FC<{ name: string; onConfirm: () => void; onClose: () => void }> = ({ name, onConfirm, onClose }) => (
   <div className="fixed inset-0 z-[200] flex items-center justify-center p-4"
-       style={{ background: 'rgba(5,13,26,0.85)', backdropFilter: 'blur(8px)' }}>
+       style={{ background: 'rgba(17,24,39,0.9)', backdropFilter: 'blur(8px)' }}>
     <div className="rounded-2xl p-8 max-w-sm w-full text-center"
-         style={{ background: 'linear-gradient(180deg,#1A3A6B,#0F2241)', border: '1px solid rgba(255,255,255,0.1)' }}>
+         style={{ background: 'linear-gradient(180deg,#1F2937,#111827)', border: '1px solid #374151' }}>
       <AlertCircle size={36} className="mx-auto mb-4" style={{ color: '#EF4444' }} />
-      <h3 className="text-white font-black text-lg mb-2">Delete Event?</h3>
-      <p className="text-sm mb-6" style={{ color: 'rgba(255,255,255,0.5)' }}>
-        Are you sure you want to delete "<strong className="text-white">{name}</strong>"? This cannot be undone.
+      <h3 className="text-[#F9FAFB] font-black text-lg mb-2">Delete Event?</h3>
+      <p className="text-sm mb-6" style={{ color: '#F9FAFB' }}>
+        Are you sure you want to delete "<strong className="text-[#F9FAFB]">{name}</strong>"? This cannot be undone.
       </p>
       <div className="flex gap-3">
         <button onClick={onClose} className="btn-ghost flex-1 py-2.5 text-sm rounded-xl">Cancel</button>
@@ -59,12 +60,12 @@ const EditModal: React.FC<{ event: Event; onSave: (data: any) => void; onClose: 
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 overflow-y-auto"
-         style={{ background: 'rgba(5,13,26,0.85)', backdropFilter: 'blur(8px)' }}>
+         style={{ background: 'rgba(17,24,39,0.9)', backdropFilter: 'blur(8px)' }}>
       <div className="rounded-2xl p-8 max-w-lg w-full my-4"
-           style={{ background: 'linear-gradient(180deg,#1A3A6B,#0F2241)', border: '1px solid rgba(255,255,255,0.1)' }}>
+           style={{ background: 'linear-gradient(180deg,#1F2937,#111827)', border: '1px solid #374151' }}>
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-white font-black text-lg">Edit Event</h3>
-          <button onClick={onClose} style={{ color: 'rgba(255,255,255,0.5)' }}><X size={20} /></button>
+          <h3 className="text-[#F9FAFB] font-black text-lg">Edit Event</h3>
+          <button onClick={onClose} style={{ color: '#F9FAFB' }}><X size={20} /></button>
         </div>
 
         <div className="space-y-4">
@@ -117,11 +118,11 @@ const EditModal: React.FC<{ event: Event; onSave: (data: any) => void; onClose: 
 // ── Simple Bar Chart ─────────────────────────────────────────────
 const BarChart: React.FC<{ data: { label: string; value: number; color?: string }[]; max: number }> = ({ data, max }) => (
   <div className="space-y-3">
-    {data.map(({ label, value, color = '#FF6B00' }) => (
+    {data.map(({ label, value, color = '#7C3AED' }) => (
       <div key={label}>
         <div className="flex justify-between text-xs mb-1.5">
-          <span style={{ color: 'rgba(255,255,255,0.65)' }}>{label}</span>
-          <span className="font-bold text-white">{value}</span>
+          <span style={{ color: '#F9FAFB' }}>{label}</span>
+          <span className="font-bold text-[#F9FAFB]">{value}</span>
         </div>
         <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
           <div className="h-full rounded-full transition-all duration-700 chart-bar"
@@ -228,31 +229,15 @@ export default function FacultyDashboard() {
       {/* ── SIDEBAR ──────────────────────────────────────────── */}
       <aside className="sidebar">
         {/* Brand */}
-        <div className="flex items-center gap-2.5 px-5 py-5 border-b"
-             style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-               style={{ background: 'linear-gradient(135deg,#FF6B00,#E05E00)' }}>
-            <Zap size={16} className="text-white" />
-          </div>
+        <div className="flex items-center gap-2.5 px-5 py-6 border-b"
+             style={{ borderColor: '#374151' }}>
+          <img src={logo} alt="Evenza Logo" className="w-9 h-9 object-contain" />
           <div>
-            <p className="text-white font-black text-base leading-none">Evenza</p>
-            <p className="text-xs leading-none mt-0.5" style={{ color: 'rgba(255,255,255,0.35)' }}>Faculty Portal</p>
+            <p className="text-[#F9FAFB] font-bold text-xl font-dancing tracking-wide">Evenza</p>
+            <p className="text-[10px] uppercase font-bold tracking-widest mt-0.5" style={{ color: '#9CA3AF' }}>Faculty Portal</p>
           </div>
         </div>
 
-        {/* User */}
-        <div className="px-5 py-4 border-b" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full flex items-center justify-center font-black text-sm"
-                 style={{ background: 'rgba(255,107,0,0.2)', color: '#FF9A47' }}>
-              {user?.name?.charAt(0).toUpperCase() || 'F'}
-            </div>
-            <div className="min-w-0">
-              <p className="text-white font-semibold text-sm truncate">{user?.name || 'Faculty'}</p>
-              <span className="badge badge-orange text-[10px] px-2 py-0.5 mt-0.5 inline-flex">STAFF</span>
-            </div>
-          </div>
-        </div>
 
         {/* Nav */}
         <nav className="flex-1 py-4 space-y-1">
@@ -265,7 +250,21 @@ export default function FacultyDashboard() {
           ))}
         </nav>
 
-        <div className="px-3 py-4 border-t" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
+        <div className="mt-auto px-3 py-4 border-t" style={{ borderColor: '#374151' }}>
+          {/* Moved User info here */}
+          <div className="px-2 py-3 mb-2 rounded-xl" style={{ background: 'rgba(124, 58, 237, 0.05)', border: '1px solid rgba(255,107,0,0.1)' }}>
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full flex items-center justify-center font-black text-sm"
+                   style={{ background: 'linear-gradient(135deg, #7C3AED, #E05E00)', color: '#fff' }}>
+                {user?.name?.charAt(0).toUpperCase() || 'F'}
+              </div>
+              <div className="min-w-0">
+                <p className="text-[#F9FAFB] font-bold text-sm truncate">{user?.name || 'Faculty'}</p>
+                <span className="badge badge-orange text-[10px] px-2 py-0.5 mt-0.5 inline-flex">STAFF</span>
+              </div>
+            </div>
+          </div>
+
           <button onClick={() => { logout(); navigate('/'); }}
             className="nav-item w-full text-left"
             style={{ color: 'rgba(239,68,68,0.7)' }}
@@ -280,7 +279,7 @@ export default function FacultyDashboard() {
       <main className="main-content flex-1 p-8">
         {loading && section !== 'launch' ? (
           <div className="loading-overlay">
-            <Loader2 size={40} className="animate-spin" style={{ color: '#FF6B00' }} />
+            <Loader2 size={40} className="animate-spin" style={{ color: '#7C3AED' }} />
           </div>
         ) : (
           <>
@@ -288,10 +287,10 @@ export default function FacultyDashboard() {
             {section === 'home' && (
               <div className="animate-fade-in">
                 <div className="mb-8">
-                  <h1 className="text-3xl font-black text-white">
-                    Faculty Dashboard <span style={{ color: '#FF9A47' }}>✦</span>
+                  <h1 className="text-3xl font-black text-[#7C3AED]">
+                    Faculty Dashboard <span>✦</span>
                   </h1>
-                  <p className="mt-1 text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                  <p className="mt-1 text-sm text-purple-600">
                     Manage events, track registrations, and view analytics
                   </p>
                 </div>
@@ -299,7 +298,7 @@ export default function FacultyDashboard() {
                 {/* Stats */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                   {[
-                    { label: 'Total Events',      value: events.length,          icon: CalendarDays, color: '#FF6B00' },
+                    { label: 'Total Events',      value: events.length,          icon: CalendarDays, color: '#7C3AED' },
                     { label: 'Total Registrations', value: totalRegistrations,   icon: Users,        color: '#10B981' },
                     { label: 'Today\'s Events',   value: todayEvents.length,     icon: Zap,          color: '#F59E0B' },
                   ].map(({ label, value, icon: Icon, color }) => (
@@ -309,8 +308,8 @@ export default function FacultyDashboard() {
                         <Icon size={22} style={{ color }} />
                       </div>
                       <div>
-                        <p className="text-3xl font-black text-white">{value}</p>
-                        <p className="text-xs font-semibold" style={{ color: 'rgba(255,255,255,0.45)' }}>{label}</p>
+                        <p className="text-3xl font-black text-[#7C3AED]">{value}</p>
+                        <p className="text-xs font-semibold text-[#A78BFA]">{label}</p>
                       </div>
                     </div>
                   ))}
@@ -320,14 +319,14 @@ export default function FacultyDashboard() {
                 {todayEvents.length > 0 && (
                   <div className="mb-8">
                     <div className="flex items-center gap-2 mb-4">
-                      <div className="w-2 h-5 rounded-full" style={{ background: '#FF6B00' }} />
-                      <h2 className="text-white font-black">Today's Events</h2>
+                      <div className="w-2 h-5 rounded-full" style={{ background: '#7C3AED' }} />
+                      <h2 className="text-[#F9FAFB] font-black">Today's Events</h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {todayEvents.map(ev => (
                         <div key={ev.id} className="event-card">
-                          <h3 className="text-white font-black mb-1">{ev.name}</h3>
-                          <div className="flex gap-4 text-xs mb-3" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                          <h3 className="text-[#F9FAFB] font-black mb-1">{ev.name}</h3>
+                          <div className="flex gap-4 text-xs mb-3" style={{ color: '#F9FAFB' }}>
                             <span><MapPin size={11} className="inline mr-1" />{ev.venue}</span>
                             {ev.time && <span><Clock size={11} className="inline mr-1" />{ev.time}</span>}
                           </div>
@@ -336,7 +335,7 @@ export default function FacultyDashboard() {
                               <Users size={10} /> {ev.registeredStudents?.length || 0} registered
                             </span>
                             <Link to={`/event/${ev.id}`} className="text-xs font-bold flex items-center gap-1"
-                                  style={{ color: '#FF9A47' }}>
+                                  style={{ color: '#A78BFA' }}>
                               View details <ChevronRight size={12} />
                             </Link>
                           </div>
@@ -350,11 +349,11 @@ export default function FacultyDashboard() {
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-5 rounded-full" style={{ background: '#FF6B00' }} />
-                      <h2 className="text-white font-black">All Events</h2>
+                      <div className="w-2 h-5 rounded-full" style={{ background: '#7C3AED' }} />
+                      <h2 className="text-[#7C3AED] font-black">All Events</h2>
                     </div>
                     <button onClick={() => setSection('events')}
-                      className="text-xs font-bold flex items-center gap-1" style={{ color: '#FF9A47' }}>
+                      className="text-xs font-bold flex items-center gap-1" style={{ color: '#A78BFA' }}>
                       Manage <ChevronRight size={14} />
                     </button>
                   </div>
@@ -362,12 +361,12 @@ export default function FacultyDashboard() {
                     {events.slice(0, 4).map(ev => (
                       <div key={ev.id} className="event-card">
                         <div className="flex justify-between items-start mb-2">
-                          <h3 className="text-white font-black text-sm">{ev.name}</h3>
+                          <h3 className="text-[#F9FAFB] font-black text-sm">{ev.name}</h3>
                           <span className="badge badge-blue text-[10px]">{formatDate(ev.date)}</span>
                         </div>
-                        <p className="text-xs mb-3" style={{ color: 'rgba(255,255,255,0.5)' }}>{ev.venue}</p>
+                        <p className="text-xs mb-3" style={{ color: '#F9FAFB' }}>{ev.venue}</p>
                         <div className="flex items-center gap-3">
-                          <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>
+                          <span className="text-xs" style={{ color: '#D1D5DB' }}>
                             <Users size={11} className="inline mr-1" />
                             {ev.registeredStudents?.length || 0} / {ev.totalSeats || '∞'} seats
                           </span>
@@ -383,8 +382,8 @@ export default function FacultyDashboard() {
             {section === 'launch' && (
               <div className="animate-fade-in max-w-2xl">
                 <div className="mb-8">
-                  <h1 className="text-3xl font-black text-white">Launch New Event</h1>
-                  <p className="mt-1 text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                  <h1 className="text-3xl font-black text-purple-600">Launch New Event</h1>
+                  <p className="mt-1 text-sm text-purple-600">
                     Fill in the details to create a new event
                   </p>
                 </div>
@@ -392,7 +391,7 @@ export default function FacultyDashboard() {
                 {/* Template restore */}
                 {template && (
                   <div className="glass-card rounded-xl p-4 mb-5 flex items-center justify-between">
-                    <span className="text-sm text-white font-medium">📋 Template saved. Restore?</span>
+                    <span className="text-sm text-purple-600 font-medium">📋 Template saved. Restore?</span>
                     <div className="flex gap-2">
                       <button onClick={() => setForm(template)}
                         className="btn-orange px-4 py-1.5 text-xs rounded-lg">
@@ -412,8 +411,7 @@ export default function FacultyDashboard() {
                     <div>
                       <label className="form-label">Event Name *</label>
                       <div className="relative">
-                        <Zap size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2"
-                             style={{ color: 'rgba(255,255,255,0.35)' }} />
+                        <Zap size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-purple-600" />
                         <input required value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
                           className="input-field pl-10" placeholder="Annual Tech Symposium" />
                       </div>
@@ -430,8 +428,7 @@ export default function FacultyDashboard() {
                       <div>
                         <label className="form-label">Time</label>
                         <div className="relative">
-                          <Clock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2"
-                                 style={{ color: 'rgba(255,255,255,0.35)' }} />
+                          <Clock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-purple-600" />
                           <input value={form.time} onChange={e => setForm(p => ({ ...p, time: e.target.value }))}
                             className="input-field pl-10" placeholder="09:00 AM" />
                         </div>
@@ -443,8 +440,7 @@ export default function FacultyDashboard() {
                       <div>
                         <label className="form-label">Venue *</label>
                         <div className="relative">
-                          <MapPin size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2"
-                                  style={{ color: 'rgba(255,255,255,0.35)' }} />
+                          <MapPin size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-purple-600" />
                           <input required value={form.venue} onChange={e => setForm(p => ({ ...p, venue: e.target.value }))}
                             className="input-field pl-10" placeholder="Main Auditorium" />
                         </div>
@@ -452,8 +448,7 @@ export default function FacultyDashboard() {
                       <div>
                         <label className="form-label">Total Seats</label>
                         <div className="relative">
-                          <Hash size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2"
-                                style={{ color: 'rgba(255,255,255,0.35)' }} />
+                          <Hash size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-purple-600" />
                           <input type="number" min="0" value={form.totalSeats}
                             onChange={e => setForm(p => ({ ...p, totalSeats: e.target.value }))}
                             className="input-field pl-10" placeholder="100 (0 = unlimited)" />
@@ -465,8 +460,7 @@ export default function FacultyDashboard() {
                     <div>
                       <label className="form-label">Description *</label>
                       <div className="relative">
-                        <AlignLeft size={15} className="absolute left-3.5 top-3.5"
-                                   style={{ color: 'rgba(255,255,255,0.35)' }} />
+                        <AlignLeft size={15} className="absolute left-3.5 top-3.5 text-purple-600" />
                         <textarea required rows={4} value={form.description}
                           onChange={e => setForm(p => ({ ...p, description: e.target.value }))}
                           className="input-field pl-10 resize-none"
@@ -496,8 +490,8 @@ export default function FacultyDashboard() {
               <div className="animate-fade-in">
                 <div className="flex items-start justify-between mb-8">
                   <div>
-                    <h1 className="text-3xl font-black text-white">Manage Events</h1>
-                    <p className="mt-1 text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                    <h1 className="text-3xl font-black text-purple-600">Manage Events</h1>
+                    <p className="mt-1 text-sm text-purple-600">
                       {events.length} events — edit, delete or view registrations
                     </p>
                   </div>
@@ -517,11 +511,11 @@ export default function FacultyDashboard() {
                         <div className="flex items-start gap-4">
                           {/* Date box */}
                           <div className="shrink-0 w-14 h-14 rounded-xl flex flex-col items-center justify-center text-center"
-                               style={{ background: 'rgba(255,107,0,0.15)', border: '1px solid rgba(255,107,0,0.25)' }}>
-                            <span className="text-[10px] font-bold uppercase leading-none" style={{ color: '#FF9A47' }}>
+                               style={{ background: 'rgba(124, 58, 237, 0.15)', border: '1px solid rgba(124, 58, 237, 0.25)' }}>
+                            <span className="text-[10px] font-bold uppercase leading-none text-purple-600">
                               {new Date(ev.date).toLocaleDateString('en-IN', { month: 'short' })}
                             </span>
-                            <span className="text-xl font-black text-white leading-none">
+                            <span className="text-xl font-black text-purple-600 leading-none">
                               {new Date(ev.date).getDate()}
                             </span>
                           </div>
@@ -529,10 +523,10 @@ export default function FacultyDashboard() {
                           {/* Content */}
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1">
-                              <h3 className="text-white font-black text-base truncate">{ev.name}</h3>
+                              <h3 className="text-[#F9FAFB] font-black text-base truncate">{ev.name}</h3>
                               {isToday(ev.date) && <span className="badge badge-orange text-[10px]">TODAY</span>}
                             </div>
-                            <div className="flex flex-wrap gap-3 text-xs mb-3" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                            <div className="flex flex-wrap gap-3 text-xs mb-3 text-purple-600">
                               <span><MapPin size={11} className="inline mr-1" />{ev.venue}</span>
                               {ev.time && <span><Clock size={11} className="inline mr-1" />{ev.time}</span>}
                               <span><Users size={11} className="inline mr-1" />
@@ -546,12 +540,12 @@ export default function FacultyDashboard() {
                                 <div className="h-full rounded-full"
                                      style={{
                                        width: `${pct}%`,
-                                       background: pct >= 90 ? '#EF4444' : pct >= 60 ? '#F59E0B' : '#FF6B00'
+                                       background: pct >= 90 ? '#EF4444' : pct >= 60 ? '#F59E0B' : '#7C3AED'
                                      }} />
                               </div>
                             )}
 
-                            <p className="text-xs line-clamp-1" style={{ color: 'rgba(255,255,255,0.4)' }}>
+                            <p className="text-xs line-clamp-1" style={{ color: '#D1D5DB' }}>
                               {ev.description}
                             </p>
                           </div>
@@ -559,14 +553,14 @@ export default function FacultyDashboard() {
                           {/* Actions */}
                           <div className="flex gap-2 shrink-0 ml-2">
                             <Link to={`/event/${ev.id}`}
-                              className="w-9 h-9 rounded-lg flex items-center justify-center transition-all"
-                              style={{ background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.5)' }}
+                              className="w-9 h-9 rounded-lg flex items-center justify-center transition-all text-purple-600"
+                              style={{ background: 'rgba(255,255,255,0.06)' }}
                               title="View Details">
                               <ChevronRight size={16} />
                             </Link>
                             <button onClick={() => setEditTarget(ev)}
-                              className="w-9 h-9 rounded-lg flex items-center justify-center transition-all"
-                              style={{ background: 'rgba(59,130,246,0.15)', color: '#93C5FD' }}
+                              className="w-9 h-9 rounded-lg flex items-center justify-center transition-all text-purple-600"
+                              style={{ background: 'rgba(59,130,246,0.15)'}}
                               title="Edit">
                               <Pencil size={15} />
                             </button>
@@ -583,8 +577,8 @@ export default function FacultyDashboard() {
                   })}
                   {events.length === 0 && (
                     <div className="glass-card rounded-2xl p-12 text-center">
-                      <CalendarDays size={40} className="mx-auto mb-3" style={{ color: 'rgba(255,255,255,0.2)' }} />
-                      <p className="font-bold text-white mb-1">No events yet</p>
+                      <CalendarDays size={40} className="mx-auto mb-3 text-purple-600" />
+                      <p className="font-bold text-[#F9FAFB] mb-1">No events yet</p>
                       <button onClick={() => setSection('launch')}
                         className="btn-orange mt-4 px-6 py-2.5 text-sm rounded-lg inline-flex">
                         <Plus size={16} /> Launch First Event
@@ -599,8 +593,8 @@ export default function FacultyDashboard() {
             {section === 'analytics' && (
               <div className="animate-fade-in">
                 <div className="mb-8">
-                  <h1 className="text-3xl font-black text-white">Analytics</h1>
-                  <p className="mt-1 text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                  <h1 className="text-3xl font-black text-purple-600">Analytics</h1>
+                  <p className="mt-1 text-sm text-purple-600">
                     Event performance and registration insights
                   </p>
                 </div>
@@ -608,15 +602,15 @@ export default function FacultyDashboard() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                   {/* Event Popularity Chart */}
                   <div className="glass-card rounded-2xl p-6">
-                    <h3 className="text-white font-black mb-1">Event Popularity</h3>
-                    <p className="text-xs mb-5" style={{ color: 'rgba(255,255,255,0.4)' }}>
+                    <h3 className="text-[#F9FAFB] font-black mb-1">Event Popularity</h3>
+                    <p className="text-xs mb-5 text-purple-600">
                       Registrations per event
                     </p>
                     <BarChart
                       data={mostPopular.slice(0, 6).map(e => ({
                         label: e.name.length > 20 ? e.name.slice(0, 20) + '…' : e.name,
                         value: e.registeredStudents?.length || 0,
-                        color: '#FF6B00',
+                        color: '#7C3AED',
                       }))}
                       max={Math.max(...events.map(e => e.registeredStudents?.length || 0), 1)}
                     />
@@ -624,8 +618,8 @@ export default function FacultyDashboard() {
 
                   {/* Seat fill ratio */}
                   <div className="glass-card rounded-2xl p-6">
-                    <h3 className="text-white font-black mb-1">Seat Utilisation</h3>
-                    <p className="text-xs mb-5" style={{ color: 'rgba(255,255,255,0.4)' }}>
+                    <h3 className="text-[#F9FAFB] font-black mb-1">Seat Utilisation</h3>
+                    <p className="text-xs mb-5 text-purple-600">
                       % of seats filled per event
                     </p>
                     <BarChart
@@ -642,7 +636,7 @@ export default function FacultyDashboard() {
                 {/* Summary table */}
                 <div className="glass-card rounded-2xl p-6">
                   <div className="flex items-center justify-between mb-5">
-                    <h3 className="text-white font-black">Registration Report</h3>
+                    <h3 className="text-[#F9FAFB] font-black">Registration Report</h3>
                     <button
                       onClick={() => {
                         const rows = [
@@ -670,10 +664,10 @@ export default function FacultyDashboard() {
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead>
-                        <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                        <tr style={{ borderBottom: '1px solid #374151' }}>
                           {['Event', 'Date', 'Venue', 'Registered', 'Available', 'Fill %'].map(h => (
                             <th key={h} className="text-left pb-3 pr-4 text-xs font-bold uppercase tracking-widest"
-                                style={{ color: 'rgba(255,255,255,0.35)' }}>{h}</th>
+                                style={{ color: '#9CA3AF' }}>{h}</th>
                           ))}
                         </tr>
                       </thead>
@@ -682,10 +676,10 @@ export default function FacultyDashboard() {
                           const reg = ev.registeredStudents?.length || 0;
                           const pct = ev.totalSeats > 0 ? Math.round((reg / ev.totalSeats) * 100) : null;
                           return (
-                            <tr key={ev.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-                              <td className="py-3 pr-4 text-white font-semibold">{ev.name}</td>
-                              <td className="py-3 pr-4 text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>{formatDate(ev.date)}</td>
-                              <td className="py-3 pr-4 text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>{ev.venue}</td>
+                            <tr key={ev.id} style={{ borderBottom: '1px solid #374151' }}>
+                              <td className="py-3 pr-4 text-[#F9FAFB] font-semibold">{ev.name}</td>
+                              <td className="py-3 pr-4 text-xs" style={{ color: '#F9FAFB' }}>{formatDate(ev.date)}</td>
+                              <td className="py-3 pr-4 text-xs" style={{ color: '#F9FAFB' }}>{ev.venue}</td>
                               <td className="py-3 pr-4">
                                 <span className="badge badge-orange">{reg}</span>
                               </td>
@@ -699,14 +693,14 @@ export default function FacultyDashboard() {
                                   <span className={`badge ${pct >= 90 ? 'badge-red' : pct >= 60 ? 'badge-orange' : 'badge-green'}`}>
                                     {pct}%
                                   </span>
-                                ) : <span className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>N/A</span>}
+                                ) : <span className="text-xs" style={{ color: '#9CA3AF' }}>N/A</span>}
                               </td>
                             </tr>
                           );
                         })}
                         {events.length === 0 && (
                           <tr><td colSpan={6} className="py-8 text-center text-sm"
-                                  style={{ color: 'rgba(255,255,255,0.3)' }}>No data yet</td></tr>
+                                  style={{ color: '#9CA3AF' }}>No data yet</td></tr>
                         )}
                       </tbody>
                     </table>

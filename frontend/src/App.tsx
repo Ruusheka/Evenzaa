@@ -28,7 +28,7 @@ function AppRoutes() {
           style: {
             background: '#1A3A6B',
             color: '#fff',
-            border: '1px solid rgba(255,255,255,0.12)',
+            border: '1px solid #374151',
             borderRadius: '12px',
             fontWeight: '600',
           },
