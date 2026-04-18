@@ -102,7 +102,7 @@ export default function EventDetails() {
         <AlertCircle size={48} className="mx-auto mb-4" style={{ color: '#9CA3AF' }} />
         <h2 className="text-[#F9FAFB] font-black text-2xl mb-2">Event Not Found</h2>
         <button onClick={() => navigate(-1)}
-          className="btn-orange px-6 py-2.5 text-sm rounded-xl mt-4 inline-flex">
+          className="btn-orange px-6 py-2.5 text-sm rounded-xl mt-4 inline-flex text-[#F9FAFB]">
           Go Back
         </button>
       </div>
@@ -192,7 +192,7 @@ export default function EventDetails() {
       <main className="main-content flex-1 p-8 overflow-y-auto">
         {/* Back button */}
         <button onClick={() => navigate(-1)}
-          className="flex items-center gap-2 mb-8 text-sm font-semibold transition-colors"
+          className="flex items-center gap-2 mb-8 text-sm font-semibold transition-colors text-[#F9FAFB]"
           style={{ color: '#F9FAFB' }}
           onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#A78BFA'}
           onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#F9FAFB'}>
