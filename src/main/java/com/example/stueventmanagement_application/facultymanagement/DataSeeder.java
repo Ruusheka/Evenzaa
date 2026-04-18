@@ -19,9 +19,9 @@ public class DataSeeder {
                 f.setPassword("password"); 
                 f.setFacultyId("F001");
                 repo.save(f);
-                System.out.println("âœ… GUARANTEED FACULTY CREATED: faculty@ssn.edu.in / password");
+                System.out.println("Ã¢Å“â€¦ GUARANTEED FACULTY CREATED: faculty@ssn.edu.in / password");
             } else {
-                System.out.println("âœ… FACULTY ALREADY EXISTS: faculty@ssn.edu.in");
+                System.out.println("Ã¢Å“â€¦ FACULTY ALREADY EXISTS: faculty@ssn.edu.in");
             }
         };
     }

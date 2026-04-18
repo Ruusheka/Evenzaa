@@ -56,7 +56,7 @@ public class DataSeeder {
                 e3.setRegisteredStudents(new ArrayList<>());
                 repo.save(e3);
 
-                System.out.println("âœ… Evenza: 3 seed events created successfully.");
+                System.out.println("Ã¢Å“â€¦ Evenza: 3 seed events created successfully.");
             }
         };
     }

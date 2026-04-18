@@ -21,7 +21,7 @@ public class DataSeeder {
                 s.setPhone("9876543210");
                 s.setDepartment("Computer Science");
                 repo.save(s);
-                System.out.println("âœ… TEST STUDENT CREATED: stu@ssn.edu.in / password");
+                System.out.println("Ã¢Å“â€¦ TEST STUDENT CREATED: stu@ssn.edu.in / password");
             }
         };
     }
