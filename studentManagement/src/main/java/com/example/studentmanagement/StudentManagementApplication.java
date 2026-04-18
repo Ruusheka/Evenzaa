@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean; // Add this import
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate; // Add this import
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.example")
 @CrossOrigin(origins = "http://localhost:3000")
 public class StudentManagementApplication {
 
