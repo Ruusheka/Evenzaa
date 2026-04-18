@@ -1,7 +1,7 @@
 const BASE = {
-  faculty:  'http://127.0.0.1:8081',
-  student:  'http://127.0.0.1:8082',
-  events:   'http://127.0.0.1:8085',
+  faculty:  'https://evenzaa-production.up.railway.app',
+  student:  'https://evenzaa-production.up.railway.app',
+  events:   'https://evenzaa-production.up.railway.app',
 };
 
 // ─── Generic fetch helper ────────────────────────────────────────
