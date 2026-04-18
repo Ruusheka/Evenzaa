@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class DataSeeder {
+public class FacultyDataSeeder {
 
     @Bean
-    CommandLineRunner initDatabase(FacultyRepository repo) {
+    CommandLineRunner initFacultyDatabase(FacultyRepository repo) {
         return args -> {
             // Check if this specific test faculty exists
             if (repo.findByEmail("faculty@ssn.edu.in") == null) {

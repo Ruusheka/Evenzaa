@@ -10,10 +10,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Configuration
-public class DataSeeder {
+public class EventDataSeeder {
 
     @Bean
-    CommandLineRunner initDatabase(EventRepository repo) {
+    CommandLineRunner initEventDatabase(EventRepository repo) {
         return args -> {
             if (repo.findAll().isEmpty()) {
                 // Event 1: Hackathon
