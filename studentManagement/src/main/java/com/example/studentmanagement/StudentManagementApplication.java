@@ -1,4 +1,5 @@
-package com.example.stueventmanagement_application.studentManagement;
+package com.example.studentmanagement;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean; // Add this import
