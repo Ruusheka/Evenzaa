@@ -545,7 +545,7 @@ export default function StudentDashboard() {
                 </div>
 
                 {/* Search */}
-                <div className="relative mb-6">
+                <div className="relative mb-6 text-[#F9FAFB]">
                   <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-600" />
                   <input type="text" value={search} onChange={e => setSearch(e.target.value)}
                     className="input-field pl-10" placeholder="Search events by name or venue..." />
