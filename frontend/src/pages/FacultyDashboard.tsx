@@ -5,7 +5,7 @@ import {
   MapPin, Clock, Hash, AlignLeft, Save, AlertCircle
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { api } from '../api';
 import { Event } from '../types';
 import toast from 'react-hot-toast';
@@ -138,7 +138,8 @@ export default function FacultyDashboard() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  const [section, setSection] = useState<Section>('home');
+  const location = useLocation();
+  const [section, setSection]   = useState<Section>((location.state as any)?.section || 'home');
   const [events, setEvents]     = useState<Event[]>([]);
   const [loading, setLoading]   = useState(true);
   const [saving, setSaving]     = useState(false);

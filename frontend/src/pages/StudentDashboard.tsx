@@ -5,7 +5,7 @@ import {
   Loader2, Users, MapPin, Clock, QrCode, X, RefreshCw
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { api } from '../api';
 import { Event } from '../types';
 import toast from 'react-hot-toast';
@@ -285,7 +285,8 @@ export default function StudentDashboard() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  const [section, setSection] = useState<Section>('home');
+  const location = useLocation();
+  const [section, setSection] = useState<Section>((location.state as any)?.section || 'home');
   const [allEvents, setAllEvents] = useState<Event[]>([]);
   const [myEvents, setMyEvents] = useState<Event[]>([]);
   const [cancelledEvents, setCancelled] = useState<Event[]>([]);
@@ -579,7 +580,7 @@ export default function StudentDashboard() {
                     </p>
                   </div>
                   <button onClick={triggerRefresh}
-                    className="btn-ghost px-3 py-2 rounded-xl text-xs flex items-center gap-2">
+                    className="btn-ghost px-3 py-2 rounded-xl text-xs flex items-center gap-2 text-[#F9FAFB]">
                     <RefreshCw size={14} /> Sync
                   </button>
                 </div>
