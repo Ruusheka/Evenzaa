@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication(scanBasePackages = "com.example")
 @RestController
@@ -17,6 +19,11 @@ public class StuEventManagementApplication {
     public static void main(String[] args) {
         System.out.println("Starting application... checking Railway deployment config");
         SpringApplication.run(StuEventManagementApplication.class, args);
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 
     @PostConstruct
