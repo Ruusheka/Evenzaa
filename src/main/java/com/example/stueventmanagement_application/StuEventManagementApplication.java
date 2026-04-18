@@ -34,9 +34,4 @@ public class StuEventManagementApplication {
         System.out.println("=========================================");
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "Backend is working";
-    }
-
 }
