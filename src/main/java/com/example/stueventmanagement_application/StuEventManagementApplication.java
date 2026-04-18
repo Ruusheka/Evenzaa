@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.example")
 @RestController
 public class StuEventManagementApplication {
 
