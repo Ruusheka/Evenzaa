@@ -11,7 +11,6 @@
 </div>
 
 <br />
----
 
 ## 🚀 About the Project
 
