@@ -11,25 +11,6 @@
 </div>
 
 <br />
-
-## 📖 Table of Contents
-- [About the Project](#-about-the-project)
-- [Architecture Diagram](#-architecture-diagram)
-- [Detailed Features & Operations](#-detailed-features--operations)
-  - [Student Portal](#1-student-portal)
-  - [Faculty Portal](#2-faculty-portal)
-  - [Security & Core System](#3-security--core-system)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Backend Setup](#backend-setup)
-  - [Frontend Setup](#frontend-setup)
-- [Comprehensive API Endpoints](#-comprehensive-api-endpoints)
-- [Contributing](#-contributing)
-
----
-
 ## 🚀 About the Project
 
 **Evenzaa** (StuEventManagement_Application) is a highly scalable, robust web platform designed to streamline the organization, management, and participation in campus events. By offering distinct portals for students and faculty members, it ensures a tailored experience for all users. 
@@ -111,7 +92,10 @@ graph TD
     FR -- "Data" --> MongoDB
 ```
 
+[![FixIt Demo](Evenzaa.png)](https://evenzaa-m9ob.onrender.com/)
+
 ---
+
 
 ## ⚙️ Detailed Features & Operations
 
