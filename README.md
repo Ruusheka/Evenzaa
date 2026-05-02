@@ -11,6 +11,8 @@
 </div>
 
 <br />
+---
+
 ## 🚀 About the Project
 
 **Evenzaa** (StuEventManagement_Application) is a highly scalable, robust web platform designed to streamline the organization, management, and participation in campus events. By offering distinct portals for students and faculty members, it ensures a tailored experience for all users. 
