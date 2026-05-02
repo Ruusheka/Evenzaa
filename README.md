@@ -1,4 +1,3 @@
-
 <div align="center">
   <h1>🎉 Evenzaa</h1>
   <p><strong>A Modern, Full-Stack Campus Event Management Platform</strong></p>
@@ -46,55 +45,70 @@ The application follows a decoupled client-server architecture, using RESTful AP
 ```mermaid
 graph TD
     %% Frontend Layer
-    subgraph Frontend [Client-Side UI (React + Vite)]
-        Router[React Router DOM]
-        AuthCtx[Auth Context State]
+    subgraph Frontend["Client-Side UI"]
+        Router["React Router DOM"]
+        AuthCtx["Auth Context State"]
         
-        subgraph Portals
-            SP[Student Dashboard]
-            FP[Faculty Dashboard]
-            ED[Event Details Page]
+        subgraph Portals["Dashboards"]
+            SP["Student Dashboard"]
+            FP["Faculty Dashboard"]
+            ED["Event Details Page"]
         end
         
         Router --> AuthCtx
-        AuthCtx --> Portals
+        AuthCtx --> SP
+        AuthCtx --> FP
+        AuthCtx --> ED
     end
 
     %% API Gateway / Controllers
-    subgraph Backend [Server-Side API (Spring Boot)]
-        Security[JWT Filter / Auth Manager]
+    subgraph Backend["Server-Side API"]
+        Security["JWT Filter"]
         
-        subgraph Controllers
-            EC[Event Controller]
-            SC[Student Controller]
-            FC[Faculty Controller]
+        subgraph Controllers["REST Controllers"]
+            EC["Event Controller"]
+            SC["Student Controller"]
+            FC["Faculty Controller"]
         end
         
-        subgraph Services
-            ES[Event Service]
-            SS[Student Service]
-            FS[Faculty Service]
+        subgraph Services["Business Logic"]
+            ES["Event Service"]
+            SS["Student Service"]
+            FS["Faculty Service"]
         end
         
-        subgraph Repositories
-            ER[Event Repo]
-            SR[Student Repo]
-            FR[Faculty Repo]
+        subgraph Repositories["Data Access"]
+            ER["Event Repo"]
+            SR["Student Repo"]
+            FR["Faculty Repo"]
         end
 
-        Security --> Controllers
-        Controllers --> Services
-        Services --> Repositories
+        Security --> EC
+        Security --> SC
+        Security --> FC
+        
+        EC --> ES
+        SC --> SS
+        FC --> FS
+        
+        ES --> ER
+        SS --> SR
+        FS --> FR
     end
 
     %% Database Layer
-    subgraph DB [Database]
-        MongoDB[(MongoDB NoSQL)]
+    subgraph DB["Database"]
+        MongoDB[("MongoDB NoSQL")]
     end
 
     %% Connections
-    Portals -- HTTP/REST Requests --> Security
-    Repositories -- Spring Data --> MongoDB
+    SP -- "REST" --> Security
+    FP -- "REST" --> Security
+    ED -- "REST" --> Security
+    
+    ER -- "Data" --> MongoDB
+    SR -- "Data" --> MongoDB
+    FR -- "Data" --> MongoDB
 ```
 
 ---
